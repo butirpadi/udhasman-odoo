@@ -1,0 +1,37 @@
+<openerp>
+    <data>
+        <!-- Action View -->
+        <record id="hs_action_partner_customer_form" model="ir.actions.act_window">
+            <field name="name">Data Customer</field>
+            <field name="res_model">res.partner</field>
+            <field name="inherit_id" ref="base.action_partner_supplier_form"/>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('supplier','=',0),('customer','=',1),('is_company','=',1)]</field>
+            <field name="context">{'default_customer':1,'default_supplier':0,'default_is_company':1,'default_company_type':'company','default_country_id':101}</field>
+        </record>
+
+        <!-- Customer Form View -->
+        <record id="hs_view_partner_customer_form" model="ir.ui.view">
+            <field name="name">hs.res.partner.customer.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook" position="before" >
+                    <notebook attrs="{'invisible': [('customer','=', False)]}" >
+                        <page string="Data Pekerjaan" >
+                            <!-- <group> -->
+                                <field name="pekerjaan_ids">
+                                    <tree>
+                                        <field name="name" />
+                                        <field name="tahun" />
+                                        <field name="partner_id" invisible="1" />
+                                    </tree>
+                                </field>
+                            <!-- </group> -->
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

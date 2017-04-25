@@ -1,0 +1,210 @@
+<openerp>
+    <data>
+        
+        <!-- Action View -->
+        <record id="hs_action_orders" model="ir.actions.act_window">
+            <field name="name">Sales Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="priority" eval="2"/>
+            <!-- <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field> -->
+            <field name="view_mode">tree,form,graph</field>
+            <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+            <field name="inherit_id" ref="sale.action_orders"/>
+            <field name="domain">[('supplier','=',0),('customer','=',1),('is_company','=',1)]</field>
+            <field name="domain">[('state', 'in', ('draft', 'sale', 'done', 'sent', 'cancel'))]</field>
+        </record>
+
+        <!-- Sales Order Form -->
+        <record id="hs_view_order_form" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="priority" eval="2"/>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <!-- Tambahkan Field Pekerjaan -->
+                <field name="partner_id" position="after">
+                    <field name="pekerjaan_id" domain="[('partner_id','=',partner_id)]" options='{"no_create": 1, "no_create_edit": 1, "no_open":1}' attrs="{'readonly':[('state','!=','draft')]}" />
+                </field>
+                <!-- Add option noedit, nocreate -->
+                <field name="partner_id" position="attributes">
+                    <attribute name="options">{"no_create": 1, "no_create_edit": 1, "no_open":1}</attribute>
+                    <attribute name="domain">[('customer','=',1),('supplier','=',0),('is_company','=',1)]</attribute>
+                </field>
+                <!-- Hide Expiration Date -->
+                <field name="validity_date" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="confirmation_date" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <!-- Hide Price List -->
+                <field name="pricelist_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <!-- Hide Payment Term -->
+                <field name="payment_term_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <!-- Limit 1 product on order_line -->
+                <field name="order_line" position="attributes">
+                    <attribute name="limit">1</attribute>
+                </field>
+                <!-- Hide some column on order lines -->
+                <!-- Hide Column Name/Description -->
+                <xpath expr="//form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='name']" position="attributes" >
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!-- Hide Column Qty Delivered -->
+                <xpath expr="//form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='qty_delivered']" position="attributes" >
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!-- Hide Column Qty Invoiced -->
+                <xpath expr="//form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='qty_invoiced']" position="attributes" >
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!-- Hide Column tax -->
+                <xpath expr="//form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='tax_id']" position="attributes" >
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!-- Set Readonly Column Ordered Qty -->
+                <xpath expr="//form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="attributes" >
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+                <!-- Set Readonly Column Unit Price -->
+                <xpath expr="//form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='price_unit']" position="attributes" >
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+                <!-- Change Product id add option nocreate noedit -->
+                <xpath expr="//form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='product_id']" position="attributes" >
+                    <attribute name="options">{"no_create": 1, "no_create_edit": 1, "no_open":1}</attribute>
+                </xpath>
+                <!-- Hide Page Other Information -->
+                <xpath expr="//form/sheet/notebook/page[2]" position="attributes" >
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <button name="action_quotation_send" states="draft" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </button>
+                <button name="action_quotation_send" states="sent,sale" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </button>
+
+                <button name="print_quotation" states="draft" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </button>
+
+                <!-- <button name="action_confirm" states="sent" string="Confirm Sale" class="btn-primary o_sale_confirm" type="object" /> -->
+                <!-- <button name="action_confirm" states="draft" string="Confirm Sale" class="o_sale_confirm" type="object" /> -->
+                <button name="print_quotation" states="sent,sale" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </button>
+                <!-- <button name="action_cancel" states="draft,sent,sale" type="object" string="Cancel"/> -->
+                <!-- <button name="action_draft" states="cancel" type="object" string="Set to Quotation"/> -->
+                <!-- <button name="action_done" type="object" string="Lock" states="sale"
+                    help="If the sale is locked, you can not modify it anymore. However, you will still be able to invoice or deliver."/> -->
+
+                <!-- Hide Button Print on Header -->
+                <!-- <button name="print_quotation" position="attributes" >
+                    <attribute name="invisible">1</attribute>
+                </button> -->
+                <!-- Hide Button Send byEmail on Header -->
+               <!--  <button name="action_quotation_send" position="attributes" >
+                    <attribute name="invisible">1</attribute>
+                </button> -->
+                <!-- Replace State Status -->
+                <field name="state" position="attributes">
+                    <attribute  name="statusbar_visible">'draft,sale'</attribute>
+                </field>
+                <!-- Hide Untaxed Amount -->
+                <field name="amount_untaxed" position="attributes">
+                    <attribute  name="invisible">1</attribute>
+                </field>
+                <!-- Hide Tax Amount -->
+                <field name="amount_tax" position="attributes">
+                    <attribute  name="invisible">1</attribute>
+                </field>
+
+                <!-- # Sembunyikan Tombol Craete Invoice sebelum status delivery done -->
+                <button name="%(sale.action_view_sale_advance_payment_inv)d" position="attributes">
+                    <attribute  name="attrs">{}</attribute>
+                </button>
+                <button name="%(sale.action_view_sale_advance_payment_inv)d" position="attributes">
+                    <attribute  name="attrs">{'invisible': [('picking_status','!=','done')]}</attribute>
+                </button>
+                <!-- Tambahkan TOmbol Create Nota Timbang -->
+                <!-- <button name="action_view_invoice" position="before">
+                    <button name="action_view_nota_timbang"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o"
+                            >
+                            <field name="nota_timbang_count" widget="statinfo" string="Nota Timbang"/>
+                        </button>    
+                </button> -->
+
+                <!-- Tampilkan Status Pengiriman -->
+                <field name="date_order" position="after">
+                    <field name="picking_status" />
+                    <!-- <field name="nota_timbang_status" /> -->
+                </field>
+
+                <!-- Tampiklan tanggal pengiriman di semua status dan jadikan readonly di status sale & done -->
+                <field name="date_order" position="attributes">
+                    <attribute name="attrs">{}</attribute>
+                </field>
+
+                <!-- <field name="partner_id" position="after">
+                    <button class="btn-primary" name="TOMBOL" attrs="{'invisible': [('picking_status','!=','done')]}" />
+                </field> -->
+
+                 <!-- attrs="{'invisible':[('nota_timbang_status','=',0)]}" -->
+                <xpath expr="//form/sheet/notebook/page[1]" position="after">
+                    <page string="Nota Timbang"  >
+                        <group>
+                            <group>
+                                <field name='nomor_nota_timbang'/>
+                                <field name='kalkulasi' />
+                                <field name='panjang' attrs="{'invisible':[('kalkulasi','!=','kubikasi')]}" />
+                                <field name='lebar' attrs="{'invisible':[('kalkulasi','!=','kubikasi')]}" />
+                                <field name='tinggi' attrs="{'invisible':[('kalkulasi','!=','kubikasi')]}" />
+                                <field name='gross' attrs="{'invisible':[('kalkulasi','!=','tonase')]}"/>
+                                <field name='tare' attrs="{'invisible':[('kalkulasi','!=','tonase')]}" />
+                            </group>
+                            <group>
+                                <field name='volume'  attrs="{'invisible':[('kalkulasi','!=','kubikasi')]}" />
+                                <field name='netto'  attrs="{'invisible':[('kalkulasi','!=','tonase')]}" />
+                                <field name='harga_satuan'/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <!-- Tree View -->
+        <record id="hs_view_order_tree" model="ir.ui.view">
+            <field name="name">hs.sale.order.tree</field>
+            <field name="model">sale.order</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='user_id']" position="attributes" >
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//tree/field[@name='user_id']" position="before" >
+                    <field name="driver" />
+                </xpath>
+               <!--  <xpath expr="//tree/field[@name='user_id']" position="before" >
+                    <field name="picking_status" />
+                </xpath> -->
+            </field>
+        </record>
+        
+
+    </data>
+</openerp>

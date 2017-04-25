@@ -1,0 +1,57 @@
+<openerp>
+	<data>
+		<!-- List View -->
+		<record model="ir.ui.view" id="hs_pekerjaan_list">
+	      <field name="name">hs.pekerjaan.list</field>
+	      <field name="model">hs.pekerjaan</field>
+	      <field name="arch" type="xml">
+	        <tree>
+	          <!--<field name="create_date"/>-->
+	          <field name="name"/>
+	          <field name="partner_id"/>
+	          <field name="tahun"/>
+	        </tree>
+	      </field>
+	    </record>
+
+	    <record id="hs_pekerjaan_form" model="ir.ui.view">
+	      <field name="name">hs.pekerjaan.form</field>
+	      <field name="model">hs.pekerjaan</field>
+	      <field name="priority">1</field>
+	      <field name="arch" type="xml">
+	        <form string="pekerjaan form">
+	          <sheet>
+	            <div class="oe_title">
+	              <label for="name" string="Nama"/>
+	              <h1>
+	                <field name="name"/>
+	              </h1>
+	            </div>
+	            <group>
+	            	<group>
+	                	<field name="partner_id" domain="[('customer', '=', True)]" options='{"no_create": 1, "no_create_edit": 1, "no_open":1}' />
+	                	<field name="tahun" />
+	            	</group>
+	            	<group>
+						<field name="alamat" />	
+						<field name="provinsi_id" options='{"no_create": 1, "no_create_edit": 1, "no_open":1}'/>
+                  		<field name="kabupaten_id" options='{"no_create": 1, "no_create_edit": 1, "no_open":1}' domain="[('provinsi_id', '=', provinsi_id)]"/>
+                  		<field name="kecamatan_id" options='{"no_create": 1, "no_create_edit": 1, "no_open":1}' domain="[('kabupaten_id', '=', kabupaten_id)]"/>	
+	            	</group>
+	            </group>
+	          </sheet>
+	        </form>
+	      </field>
+	    </record>
+	    
+
+	    <!-- actions opening views on models -->
+	    
+	    <record model="ir.actions.act_window" id="hs_action_pekerjaan">
+	      <field name="name">Data Pekerjaan</field>
+	      <field name="res_model">hs.pekerjaan</field>
+	      <field name="view_mode">tree,form</field>
+	      <!-- <field name="domain">[('partner_id.customer','=',1)]</field> -->
+	    </record>
+	</data>
+</openerp>

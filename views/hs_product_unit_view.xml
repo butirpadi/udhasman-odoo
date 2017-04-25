@@ -1,0 +1,44 @@
+<openerp>
+  <data>
+    <!-- explicit list view definition -->
+    
+    <record model="ir.ui.view" id="hs_product_unit_list">
+      <field name="name">hs.product_unit.list</field>
+      <field name="model">hs.product.unit</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="hs_product_unit_form" model="ir.ui.view">
+      <field name="name">hs.product_unit.form</field>
+      <field name="model">hs.product.unit</field>
+      <field name="priority">1</field>
+      <field name="arch" type="xml">
+        <form string="product_unit form">
+          <sheet>
+            <div class="oe_title">
+              <label for="name" string="Nama"/>
+              <h1>
+                <field name="name"/>
+              </h1>
+            </div>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    
+
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="hs_action_product_unit">
+      <field name="name">Data Product Unit</field>
+      <field name="res_model">hs.product.unit</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+   
+    
+  </data>
+</openerp>

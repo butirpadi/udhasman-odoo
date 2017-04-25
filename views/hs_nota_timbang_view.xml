@@ -1,0 +1,46 @@
+<openerp>
+	<data>
+		<!-- List View -->
+		<record model="ir.ui.view" id="hs_nota_timbang_tree">
+	      <field name="name">hs.nota_timbang.list</field>
+	      <field name="model">hs.nota.timbang</field>
+	      <field name="arch" type="xml">
+	        <tree>
+	          <field name="name"/>
+	        </tree>
+	      </field>
+	    </record>
+
+	    <record id="hs_nota_timbang_form" model="ir.ui.view">
+	      <field name="name">hs.nota_timbang.form</field>
+	      <field name="model">hs.nota.timbang</field>
+	      <field name="priority">1</field>
+	      <field name="arch" type="xml">
+	        <form string="nota_timbang form">
+	          <sheet>
+	            <group>
+	                <!-- <group> -->
+	                	<field name="kalkulasi" />
+	                	<field name="panjang" />
+	                	<field name="lebar" />
+	                	<field name="tinggi" />
+	                	<field name="gross" />
+	                	<field name="tare" />
+	                	<field name="netto" />
+	                <!-- </group> -->
+	                <!-- <group></group> -->
+	            </group>
+	          </sheet>
+	        </form>
+	      </field>
+	    </record>
+	    
+
+	    <!-- actions opening views on models -->	    
+	    <record model="ir.actions.act_window" id="hs_action_nota_timbang">
+	      <field name="name">Nota Timbang</field>
+	      <field name="res_model">hs.nota.timbang</field>
+	      <field name="view_mode">tree,form</field>
+	    </record>
+	</data>
+</openerp>

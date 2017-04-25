@@ -1,0 +1,83 @@
+<openerp>
+	<data>
+		
+		<!-- Action View -->
+		<record id="hs_action_partner_supplier_form" model="ir.actions.act_window">
+            <field name="name">Data Supplier</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="inherit_id" ref="base.action_partner_supplier_form"/>
+            <field name="domain">[('supplier','=',1),('customer','=',0),('is_company','=',1)]</field>
+            <field name="context">{'default_customer':0,'default_supplier':1,'default_is_company':1,'default_company_type':'company','default_country_id':101}</field>
+        </record>
+
+        <!-- Form View -->
+        <record id="hs_view_partner_form" model="ir.ui.view">
+            <field name="name">hs.res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="priority" eval="2"/>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+            	<field name="company_type" position="after">
+            		<label for="name" string="Nama"/>
+            	</field>
+            	<field name="company_type" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</field>
+            	<field name="state_id" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</field>
+            	<field name="zip" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</field>
+            	<field name="city" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</field>
+            	<field name="website" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</field>
+            	<field name="category_id" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</field>
+            	<field name="lang" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</field>
+            	<field name="website" position="before">
+            		<field name="provinsi_id" options='{"no_create": 1, "no_create_edit": 1, "no_open":1}'/>
+                    <field name="kabupaten_id" options='{"no_create": 1, "no_create_edit": 1, "no_open":1}' domain="[('provinsi_id', '=', provinsi_id)]"/>
+                    <field name="kecamatan_id" options='{"no_create": 1, "no_create_edit": 1, "no_open":1}' domain="[('kabupaten_id', '=', kabupaten_id)]"/>
+            	</field>
+            	<field name="country_id" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</field>
+            	<button name="toggle_active" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</button>
+                <!-- Hide Page -->
+                <xpath expr="//form/sheet/notebook" position="attributes">
+                    <attribute name="invisible">"1"</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="hs_view_partner_tree" model="ir.ui.view">
+            <field name="name">hs.res.partner.tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <field name="function" position="attributes">
+                	<attribute name="invisible">1</attribute>
+                </field>
+                <field name="phone" position="after">
+                	<field name="mobile" />
+                	<field name="fax" />
+                </field>
+                <field name="email" position="attributes">
+                	<attribute name="invisible">1</attribute>
+                </field>
+            </field>
+        </record>
+
+	</data>
+</openerp>

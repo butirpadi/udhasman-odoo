@@ -1,0 +1,46 @@
+<openerp>
+	<data>
+		<!-- List View -->
+		<record model="ir.ui.view" id="hs_armada_list">
+	      <field name="name">hs.armada.list</field>
+	      <field name="model">hs.armada</field>
+	      <field name="arch" type="xml">
+	        <tree>
+	          <!--<field name="create_date"/>-->
+	          <field name="name"/>
+	          <field name="keterangan"/>
+	        </tree>
+	      </field>
+	    </record>
+
+	    <record id="hs_armada_form" model="ir.ui.view">
+	      <field name="name">hs.armada.form</field>
+	      <field name="model">hs.armada</field>
+	      <field name="priority">1</field>
+	      <field name="arch" type="xml">
+	        <form string="armada form">
+	          <sheet>
+	            <div class="oe_title">
+	              <label for="name" string="Nopol"/>
+	              <h1>
+	                <field name="name"/>
+	              </h1>
+	            </div>
+	            <group>
+	                <field name="keterangan" />
+	            </group>
+	          </sheet>
+	        </form>
+	      </field>
+	    </record>
+	    
+
+	    <!-- actions opening views on models -->
+	    
+	    <record model="ir.actions.act_window" id="hs_action_armada">
+	      <field name="name">Data Armada</field>
+	      <field name="res_model">hs.armada</field>
+	      <field name="view_mode">tree,form</field>
+	    </record>
+	</data>
+</openerp>
