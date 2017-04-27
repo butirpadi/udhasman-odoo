@@ -1,0 +1,86 @@
+<openerp>
+	<data>
+		
+	<!-- Action View -->
+	<record id="hs_action_invoice_tree1" model="ir.actions.act_window">
+            <field name="name">Customer Invoices</field>
+            <field name="res_model">account.invoice</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field eval="False" name="view_id"/>
+            <field name="domain">[('type','in',('out_invoice', 'out_refund')),('state','in',('open','paid','cancel'))]</field>
+            <field name="context">{'type':'out_invoice', 'journal_type': 'sale'}</field>
+            <field name="inherit_id" ref="account.action_invoice_tree1"/>
+            <field name="search_view_id" ref="account.view_account_invoice_filter"/>
+      </record>
+
+      <record id="invoice_form" model="ir.ui.view">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                  <!-- // Hide Tombol Create -->
+                  <form position="attributes">
+                        <attribute name="create">0</attribute>
+                  </form>
+
+                  <!-- Hide cancel invoice button -->
+                  <button name="action_invoice_cancel" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                  </button>
+
+                  <!-- Hide Address on partner_id field -->
+                  <field name="partner_id" position="attributes">
+                        <attribute name="context">{'search_default_customer':1, 'show_address': 0}</attribute>
+                        <attribute name="readonly">1</attribute>
+                  </field>
+
+                  <!-- Hide Payment Term field -->
+                  <field name="payment_term_id" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                  </field>
+
+                  <!-- Hide Salesperson field -->
+                  <field name="user_id" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                  </field>
+
+                  <!-- hide orher info page -->
+                  <page name="other_info" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                  </page>
+
+                  <!-- Hide Description on invoice line -->
+                  <field name="name" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                  </field>
+
+                  <!-- Hide Taxes column on invoice line -->
+                  <field name="invoice_line_tax_ids" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                  </field>
+
+                  <!-- Hide Taxed & Untaxed Amount -->
+                  <field name="amount_untaxed" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                  </field>
+                  <field name="amount_tax" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                  </field>
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_invoice_form">
+            <field name="name">Account Invoice</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <field name="team_id" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                  </field>
+            </field>
+        </record>
+
+	</data>
+</openerp>

@@ -27,6 +27,7 @@
     <menuitem name="Sales" id="hs_menu_root_sales"/>
             <menuitem name="Sales" id="hs_menu_sales" parent="hs_menu_root_sales" />
                 <menuitem name="Sales Orders" id="hs_menu_sales_order" parent="hs_menu_sales" action="udhasman.hs_action_orders"/>
+                <menuitem name="Customer Invoices" id="hs_menu_customer_invoices" parent="hs_menu_sales" action="udhasman.hs_action_invoice_tree1"/>
 
     <menuitem name="Finance" id="hs_menu_root_finance"/>
             <!-- <menuitem name="Armada" id="hs.menu_master_armada" parent="hs.menu_master" action="hs.action_armada"/> -->

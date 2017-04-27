@@ -27,6 +27,11 @@
                 <field name="partner_id" position="after">
                     <field name="pekerjaan_id" domain="[('partner_id','=',partner_id)]" options='{"no_create": 1, "no_create_edit": 1, "no_open":1}' attrs="{'readonly':[('state','!=','draft')]}" />
                 </field>
+                <!-- Tambahkan Field status nota timbang & driver  -->
+                <field name="date_order" position="after">
+                    <field name='status_nota_timbang' invisible="1" />
+                    <field name='driver' invisible="1" />
+                </field>
                 <!-- Add option noedit, nocreate -->
                 <field name="partner_id" position="attributes">
                     <attribute name="options">{"no_create": 1, "no_create_edit": 1, "no_open":1}</attribute>
@@ -132,7 +137,7 @@
                     <attribute  name="attrs">{}</attribute>
                 </button>
                 <button name="%(sale.action_view_sale_advance_payment_inv)d" position="attributes">
-                    <attribute  name="attrs">{'invisible': [('picking_status','!=','done')]}</attribute>
+                    <attribute  name="attrs">{'invisible': ['|',('picking_status','!=','done'),('invoice_status','=','invoiced')]}</attribute>
                 </button>
                 <!-- Tambahkan TOmbol Create Nota Timbang -->
                 <!-- <button name="action_view_invoice" position="before">
@@ -147,9 +152,34 @@
 
                 <!-- Tampilkan Status Pengiriman -->
                 <field name="date_order" position="after">
-                    <field name="picking_status" />
-                    <!-- <field name="nota_timbang_status" /> -->
+                    <field name="picking_status" invisible="1" />
+                    <!-- <field name="status_nota_timbang" /> -->
                 </field>
+
+                <!-- Tampilkan kolom volume, netto di order line -->
+                <xpath expr="//form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="after" >
+                    <field name="kalkulasi" invisible="1" />
+                    <field name="volume" attrs="{'invisible':['|', ('kalkulasi','=',False), ('kalkulasi','in',['ritase','tonase'])]}" />
+                    <field name="netto" attrs="{'invisible':['|', ('kalkulasi','=',False), ('kalkulasi','in',['ritase','kubikasi'])]}" />
+                    <field name="quantity" attrs="{'invisible':['|', ('kalkulasi','=',False), ('kalkulasi','in',['kubikasi','tonase'])]}" />
+                </xpath>
+
+               <!--  <xpath expr="//form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='product_uom_qty']" attrs="{'invisible':[('kalkulasi','in',['ritase','tonase'])]}" position="after" >
+                    <field name="volume"  />
+                </xpath>
+
+                <xpath expr="//form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='product_uom_qty']" attrs="{'invisible':[('kalkulasi','in',['ritase','kubikasi'])]}" position="after" >
+                    <field name="netto"  />
+                </xpath>
+
+                <xpath expr="//form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='product_uom_qty']" attrs="{'invisible':[('kalkulasi','in',['kubikasi','tonase'])]}" position="after" >
+                    <field name="quantity"  />
+                </xpath> -->
+
+                <!-- Sembunyikan Ordered Qty -->
+                <xpath expr="//form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="attributes" >
+                    <attribute  name="invisible">1</attribute>
+                </xpath>
 
                 <!-- Tampiklan tanggal pengiriman di semua status dan jadikan readonly di status sale & done -->
                 <field name="date_order" position="attributes">
@@ -162,24 +192,32 @@
 
                  <!-- attrs="{'invisible':[('nota_timbang_status','=',0)]}" -->
                 <xpath expr="//form/sheet/notebook/page[1]" position="after">
-                    <page string="Nota Timbang"  >
+                    <!-- <page string="Nota Timbang" attrs="{'invisible':[('picking_status','!=','done')]}" > -->
+                    <page string="Nota Timbang" attrs="{'invisible':[('state','=','draft')]}" >
                         <group>
                             <group>
-                                <field name='nomor_nota_timbang'/>
-                                <field name='kalkulasi' />
-                                <field name='panjang' attrs="{'invisible':[('kalkulasi','!=','kubikasi')]}" />
-                                <field name='lebar' attrs="{'invisible':[('kalkulasi','!=','kubikasi')]}" />
-                                <field name='tinggi' attrs="{'invisible':[('kalkulasi','!=','kubikasi')]}" />
-                                <field name='gross' attrs="{'invisible':[('kalkulasi','!=','tonase')]}"/>
-                                <field name='tare' attrs="{'invisible':[('kalkulasi','!=','tonase')]}" />
+                                <field name='nomor_nota_timbang' attrs="{'readonly':[('state','in',['done','cancel'])]}" />
+                                <field name='kalkulasi' attrs="{'readonly':[('state','in',['done','cancel'])]}" />
+                                <field name='panjang' attrs="{'invisible':[('kalkulasi','!=','kubikasi')],'readonly':[('state','in',['done','cancel'])]}" />
+                                <field name='lebar' attrs="{'invisible':[('kalkulasi','!=','kubikasi')],'readonly':[('state','in',['done','cancel'])]}" />
+                                <field name='tinggi' attrs="{'invisible':[('kalkulasi','!=','kubikasi')],'readonly':[('state','in',['done','cancel'])]}" />
+                                <field name='gross' attrs="{'invisible':[('kalkulasi','!=','tonase')],'readonly':[('state','in',['done','cancel'])]}"/>
+                                <field name='tare' attrs="{'invisible':[('kalkulasi','!=','tonase')],'readonly':[('state','in',['done','cancel'])]}" />
                             </group>
                             <group>
-                                <field name='volume'  attrs="{'invisible':[('kalkulasi','!=','kubikasi')]}" />
-                                <field name='netto'  attrs="{'invisible':[('kalkulasi','!=','tonase')]}" />
-                                <field name='harga_satuan'/>
+                                <field name='volume'  attrs="{'invisible':[('kalkulasi','!=','kubikasi')],'readonly':[('state','in',['done','cancel'])]}" />
+                                <field name='netto'  attrs="{'invisible':[('kalkulasi','!=','tonase')],'readonly':[('state','in',['done','cancel'])]}" />
+                                <field name='harga_satuan' attrs="{'readonly':[('state','in',['done','cancel'])]}" />
+                                <field name='harga_total' attrs="{'readonly':[('state','in',['done','cancel'])]}" />
+                                
                             </group>
                         </group>
                     </page>
+                </xpath>
+
+                <!-- Tambabhkan Tombol Validate Nota Timbang pada Header -->
+                <xpath expr="//form/header/button[@name='action_cancel']" position="before">
+                    <button name="action_validate_nota_timbang" string="Validate Nota Timbang" type="object" class="btn-primary" attrs="{'invisible':[('status_nota_timbang','in',['draft','done'])]}" />
                 </xpath>
 
             </field>

@@ -15,5 +15,7 @@ import hs_pekerjaan
 import hs_purchase
 import hs_account_invoice
 import hs_sale_order
+import hs_sale_order_line
 import hs_stock_picking
+import hs_account_payment
 # import hs_nota_timbang

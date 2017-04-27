@@ -1,7 +1,18 @@
 <openerp>
 	<data>
-		<!-- Action  View -->
-		  <record id="hs_view_account_payment_invoice_form" model="ir.ui.view">
+       <!--  <record id="action_account_invoice_payment" model="ir.actions.act_window">
+            <field name="name">Register Payment</field>
+            <field name="res_model">account.payment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="inherit_id" ref="account.action_account_invoice_payment"/>
+            <field name="view_id" ref="account.view_account_payment_invoice_form"/>
+            <field name="context">{'default_invoice_ids': [(4, active_id, None),'default_journal_id':6]}</field>
+            <field name="target">new</field>
+        </record> -->
+        
+        <!-- Action  View -->
+          <record id="hs_view_account_payment_invoice_form" model="ir.ui.view">
             <field name="name">hs.account.payment.invoice.form</field>
             <field name="model">account.payment</field>
             <field name="inherit_id" ref="account.view_account_payment_invoice_form"/>
@@ -14,7 +25,10 @@
                 <field name="communication" position="attributes">
                     <attribute name="readonly">1</attribute>
                 </field>
+
+
             </field>
         </record>
+
 	</data>
 </openerp>

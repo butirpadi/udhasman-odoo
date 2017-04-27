@@ -44,11 +44,11 @@
         'views/hs_pekerjaan_view.xml',
         'views/hs_purchase_view.xml',
         'views/hs_account_invoice_supplier_view.xml',
-        # 'views/hs_account_invoice.xml',
         'views/hs_account_payment_view.xml',
         'views/hs_sale_view.xml',
         'views/hs_stock_picking_view.xml',
-        # 'views/hs_nota_timbang_view.xml',
+        'views/hs_sale_make_invoice_advance_views.xml',
+        'views/hs_account_invoice_view.xml',
         'views/menu.xml',
         # 'views/demo_appkonfig.xml'
     ],

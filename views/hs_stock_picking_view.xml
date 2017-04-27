@@ -71,6 +71,16 @@
                 	<attribute name="invisible">1</attribute>
                 </xpath>
 
+                <!-- Sembunyikan Tombol Validate, karena akan otomatis tervalidate ketika validate nota timbang, dengan kondisi picking type = outgoing -->
+                <button name="do_new_transfer" position="attributes" >
+                    <attribute name="invisible">1</attribute>
+                    <!-- <attribute name="attrs">{'invisible': ['|',('picking_type_code', '=', 'outgoing'),('picking_type_code', '=', False)]}</attribute> -->
+                </button>
+
+                <form position="attributes" >
+                    <attribute name="create">0</attribute>
+                </form> 
+
             </field>
         </record>
 	</data>
