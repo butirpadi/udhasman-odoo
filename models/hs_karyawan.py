@@ -19,6 +19,7 @@ class hs_karyawan(models.Model):
 	jabatan = fields.Selection([('DRV', 'DRIVER'), ('STF', 'STAFF')], required=True)
 	gaji_per_shift = fields.Float('Gaji per Shift')
 	armada_id = fields.Many2one('hs.armada', domain=lambda self: [('id', 'not in', self._get_armada_ids())], string='Armada')
+	presensi_rel_ids = fields.One2many('hs.presensi_karyawan_rel', 'karyawan_id', string="Daftar Presensi")
 
 	@api.multi
 	def _get_armada_ids(self):
@@ -120,7 +121,10 @@ class hs_karyawan(models.Model):
 			# if object.name:
 				# if context.get('show_kode',False):
 					#name for contact_address_id field
-			res.append((object.id,str(object.armada_id.name)+" - "+str(object.name)))
+			if object.jabatan == 'DRV':
+				res.append((object.id,str(object.armada_id.name)+" - "+str(object.name)))
+			else:
+				res.append((object.id,str(object.name)))
 				# else:
 					#name for contact_id field
 					# res.append((object.id,object.name))

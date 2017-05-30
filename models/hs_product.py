@@ -12,6 +12,7 @@ class hs_product(models.Model):
 	def create(self, vals):
 		# newrow = super(product_template,self).create(vals)
 		## set jika tipe adalah part maka type adalah cons
+		print('tipe produk : ' + vals['tipe_product'])
 		if vals['tipe_product'] == 'part':
 			vals.update({'type':'consu'})
 			vals.update({'purchase_ok':True})

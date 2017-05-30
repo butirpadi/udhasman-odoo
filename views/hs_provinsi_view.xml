@@ -42,7 +42,7 @@
     <!-- actions opening views on models -->
     
     <record model="ir.actions.act_window" id="hs_action_provinsi">
-      <field name="name">Data Provinsi</field>
+      <field name="name">Provinsi</field>
       <field name="res_model">hs.provinsi</field>
       <field name="view_mode">tree,form</field>
     </record>

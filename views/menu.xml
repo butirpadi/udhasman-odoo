@@ -2,59 +2,53 @@
   <data>
      <!-- Top menu item -->
 
-    <menuitem name="Data Master" id="hs_menu_root_master"/>
+    <menuitem name="Master" id="hs_menu_root_master" sequence="2" />
         <!-- menu categories -->
-        <menuitem name="Master" id="hs_menu_master" parent="hs_menu_root_master"/>
-            <menuitem name="Data Provinsi" id="hs_menu_master_provinsi" parent="hs_menu_master" action="udhasman.hs_action_provinsi"/>
-            <menuitem name="Data Kabupaten" id="hs_menu_master_kabupaten" parent="hs_menu_master" action="udhasman.hs_action_kabupaten"/>
-            <menuitem name="Data Kecamatan" id="hs_menu_master_kecamatan" parent="hs_menu_master" action="udhasman.hs_action_kecamatan"/>
-            <menuitem name="Data Lokasi Galian" id="hs_menu_master_lokasi_galian" parent="hs_menu_master" action="udhasman.hs_action_lokasi_galian"/>
-            <menuitem name="Data Alat Berat" id="hs_menu_master_alat_berat" parent="hs_menu_master" action="udhasman.hs_action_alat_berat"/>
-            <menuitem name="Data Armada" id="hs_menu_master_armada" parent="hs_menu_master" action="udhasman.hs_action_armada"/>
-            <menuitem name="Data Karyawan" id="hs_menu_master_karyawan" parent="hs_menu_master" action="udhasman.hs_action_karyawan"/>
-            <menuitem name="Data Product Unit" id="hs_menu_master_produk_unit" parent="hs_menu_master" action="udhasman.hs_action_product_unit"/>
-            <menuitem name="Data Product" id="hs_menu_master_produk" parent="hs_menu_master" action="udhasman.hs_product_template_action"/>
-            <menuitem name="Data Supplier" id="hs_menu_master_supplier" parent="hs_menu_master" action="udhasman.hs_action_partner_supplier_form"/>
-            <menuitem name="Data Customer" id="hs_menu_master_customer" parent="hs_menu_master" action="udhasman.hs_action_partner_customer_form"/>
-            <menuitem name="Data Pekerjaan" id="hs_menu_master_pekerjaan" parent="hs_menu_master" action="udhasman.hs_action_pekerjaan"/>
+        <menuitem name="Master" id="hs_menu_master" parent="hs_menu_root_master" />
+            <menuitem name="Provinsi" id="hs_menu_master_provinsi" parent="hs_menu_master" action="udhasman.hs_action_provinsi" sequence="10" />
+            <menuitem name="Kabupaten" id="hs_menu_master_kabupaten" parent="hs_menu_master" action="udhasman.hs_action_kabupaten" sequence="11" />
+            <menuitem name="Kecamatan" id="hs_menu_master_kecamatan" parent="hs_menu_master" action="udhasman.hs_action_kecamatan" sequence="12" />
+            <menuitem name="Lokasi Galian" id="hs_menu_master_lokasi_galian" parent="hs_menu_master" action="udhasman.hs_action_lokasi_galian" sequence="13" />
+            <menuitem name="Alat Berat" id="hs_menu_master_alat_berat" parent="hs_menu_master" action="udhasman.hs_action_alat_berat" sequence="14" />
+            <menuitem name="Armada" id="hs_menu_master_armada" parent="hs_menu_master" action="udhasman.hs_action_armada" sequence="15" />
+            <menuitem name="Karyawan" id="hs_menu_master_karyawan" parent="hs_menu_master" action="udhasman.hs_action_karyawan" sequence="16" />
+            <!-- <menuitem name="Product Unit" id="hs_menu_master_produk_unit" parent="hs_menu_master" action="udhasman.hs_action_product_unit" sequence="17" /> -->
+            <menuitem name="Material" id="hs_menu_master_material" parent="hs_menu_master" action="udhasman.hs_action_material_view" sequence="17" />
+            <menuitem name="Sparepart" id="hs_menu_master_sparepart" parent="hs_menu_master" action="udhasman.hs_action_sparepart_view" sequence="18" />
+            <!-- <menuitem name="Product" id="hs_menu_master_produk" parent="hs_menu_master" action="udhasman.hs_product_template_action" sequence="18" /> -->
+            <menuitem name="Supplier" id="hs_menu_master_supplier" parent="hs_menu_master" action="udhasman.hs_action_partner_supplier_form" sequence="19" />
+            <menuitem name="Customer" id="hs_menu_master_customer" parent="hs_menu_master" action="udhasman.hs_action_partner_customer_form" sequence="20" />
+            <!-- <menuitem name="Pekerjaan" id="hs_menu_master_pekerjaan" parent="hs_menu_master" action="udhasman.hs_action_pekerjaan" sequence="21" /> -->
 
-    <menuitem name="Purchases" id="hs_menu_root_purchase"/>
+    <menuitem name="Purchases" id="hs_menu_root_purchase" sequence="3"/>
             <menuitem name="Purchase" id="hs_menu_purchase" parent="hs_menu_root_purchase" />
-                <menuitem name="Purchase Orders" id="hs_menu_purchase_order" parent="hs_menu_purchase" action="udhasman.hs_purchase_form_action"/>
-                <menuitem name="Supplier Bills" id="hs_menu_supplier_bill" parent="hs_menu_purchase" action="udhasman.hs_action_invoice_tree2"/>
+                <menuitem name="Purchase Orders" id="hs_menu_purchase_order" parent="hs_menu_purchase" action="udhasman.hs_purchase_form_action" sequence="10" />
+                <menuitem name="Supplier Bills" id="hs_menu_supplier_bill" parent="hs_menu_purchase" action="udhasman.hs_action_invoice_tree2" sequence="11" />
 
-
-    <menuitem name="Sales" id="hs_menu_root_sales"/>
+    <menuitem name="Sales" id="hs_menu_root_sales" sequence="4"/>
             <menuitem name="Sales" id="hs_menu_sales" parent="hs_menu_root_sales" />
-                <menuitem name="Sales Orders" id="hs_menu_sales_order" parent="hs_menu_sales" action="udhasman.hs_action_orders"/>
-                <menuitem name="Customer Invoices" id="hs_menu_customer_invoices" parent="hs_menu_sales" action="udhasman.hs_action_invoice_tree1"/>
+                <!-- <menuitem name="Material" id="hs_menu_master_material_on_sales" parent="hs_menu_sales" action="udhasman.hs_action_material_view" sequence="9" /> -->
+                <menuitem name="Sales Orders" id="hs_menu_sales_order" parent="hs_menu_sales" action="udhasman.hs_action_orders" sequence="10" />
+                <menuitem name="Delivery Orders" id="hs_menu_delivery_order_new" parent="hs_menu_sales" action="udhasman.hs_sale_delivery_order_action" sequence="11" />
+                <menuitem name="Customer Invoices" id="hs_menu_customer_invoices" parent="hs_menu_sales" action="udhasman.hs_action_customer_invoice" sequence="12" />
 
-    <menuitem name="Finance" id="hs_menu_root_finance"/>
-            <!-- <menuitem name="Armada" id="hs.menu_master_armada" parent="hs.menu_master" action="hs.action_armada"/> -->
-            <!-- <menuitem name="Karyawan" id="hs.menu_master_karyawan" parent="hs.menu_master" action="hs.action_karyawan"/> -->
-            <!-- <menuitem name="Satuan" id="hs.menu_master_satuan" parent="hs.menu_master" action="hs.action_satuan"/> -->
-            <!-- <menuitem name="Supplier" id="hs.menu_master_supplier" parent="hs.menu_master" action="hs_action_partner_supplier_form"/> -->
-            <!-- <menuitem name="Customer" id="hs.menu_master_customer" parent="hs.menu_master" action="hs_action_partner_customer_form"/> -->
-            <!-- <menuitem name="Alat Berat" id="hs.menu_master_alat" parent="hs.menu_master" action="hs.action_alat"/> -->
+    <menuitem name="Operational" id="hs_menu_root_operational" sequence="5" />
+            <menuitem name="Operational" id="hs_menu_operational" parent="hs_menu_root_operational" />
+                <menuitem name="Alat Berat" id="hs_menu_operational_alat_berat" parent="hs_menu_operational" action="udhasman.hs_action_op_alat" />
 
-    <!-- <menuitem name="Purchase" id="hs.menu_purchase" parent="hs.menu_root" /> -->
-            <!-- <menuitem name="Request for Quotation" id="hs.menu_purchase_rfq" parent="hs.menu_purchase" action="purchase.purchase_form_action"/> -->
-            <!-- <menuitem name="Purchase Orders" id="hs.menu_purchase_order" parent="hs.menu_purchase" action="hs_purchase_form_action"/> -->
-            <!-- <menuitem name="Purchase Orders" id="hs.menu_purchase_order" parent="hs.menu_purchase" action="purchase.purchase_form_action"/> -->
+    <menuitem name="Karyawan" id="hs_menu_root_presensi" sequence="5" />
+            <menuitem name="Presensi" id="hs_menu_presensi" parent="hs_menu_root_presensi" sequence="1" />
+                <menuitem name="Input Presensi" id="hs_menu_presensi_karyawan" parent="hs_menu_presensi" action="udhasman.hs_action_presensi" sequence="2" />
+                <menuitem name="Rekap Presensi" id="hs_menu_presensi_karyawan_rekap" parent="hs_menu_presensi" action="udhasman.hs_action_rekap_presensi" sequence="3" />
+            <menuitem name="Payroll" id="hs_menu_presensi_payroll" parent="hs_menu_root_presensi" sequence="4" />
+                <menuitem name="Payroll" id="hs_menu_presensi_payroll_input" parent="hs_menu_presensi_payroll" action="udhasman.hs_action_presensi" sequence="5"  />
+                
+    <menuitem name="Finance" id="hs_menu_root_finance" sequence="6" />
+            <menuitem name="Finance" id="hs_menu_finance" parent="hs_menu_root_finance" />
+                <menuitem name="Pendapatan" id="hs_menu_finance_cash_debet" parent="hs_menu_finance" action="udhasman.hs_action_finance_cash_debet_view" />
+                <menuitem name="Pengeluaran" id="hs_menu_finance_cash_credit" parent="hs_menu_finance" action="udhasman.hs_action_finance_cash_credit_view" />
+                <menuitem name="Jurnal Kas" id="hs_menu_finance_jurnal_kas_form" parent="hs_menu_finance" action="udhasman.hs_action_finance_jurnal_kas_form_view" />
 
-    <!-- <menuitem name="Sales" id="hs.menu_sales" parent="hs.menu_root" /> -->
-    <!-- <menuitem name="Setting" id="hs.menu_setting" parent="hs.menu_root" /> -->
-
-    <!-- actions -->
-
-    <!-- MASTER CHILD MENU -->
-
-
-
-    <!-- Purchase Menu -->
-    <!-- <menuitem name="Purchase Order" id="hs.menu_purchase_order" parent="hs.menu_purchase" action="hs.action_hs_purchase"/> -->
-
-    <!-- <menuitem name="Sistem Setting" id="hs.menu_sistem_setting" parent="hs.menu_setting" action="action_appkonfig"/> -->
 
   </data>
 </openerp>

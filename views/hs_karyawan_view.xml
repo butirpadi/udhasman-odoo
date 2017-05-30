@@ -59,7 +59,7 @@
     <!-- actions opening views on models -->
     
     <record model="ir.actions.act_window" id="hs_action_karyawan">
-      <field name="name">Data Karyawan</field>
+      <field name="name">Karyawan</field>
       <field name="res_model">hs.karyawan</field>
       <field name="view_mode">tree,form</field>
     </record>

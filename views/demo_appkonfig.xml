@@ -113,24 +113,24 @@
         </record>        
 
         <!--DEMO RECORD FOR LOKASI GALIAN-->
-        <!-- <record id="data_lokasi_galian_1" model="hs.lokasigalian">
+        <record id="data_lokasi_galian_1" model="hs.lokasi.galian">
             <field name="name">Galian C PUD</field>
         </record>
-        <record id="data_lokasi_galian_2" model="hs.lokasigalian">
+        <record id="data_lokasi_galian_2" model="hs.lokasi.galian">
             <field name="name">Galian C Tambong</field>
         </record>
-        <record id="data_lokasi_galian_3" model="hs.lokasigalian">
+        <record id="data_lokasi_galian_3" model="hs.lokasi.galian">
             <field name="name">Galian C H. Saipul</field>
         </record>
-        <record id="data_lokasi_galian_4" model="hs.lokasigalian">
+        <record id="data_lokasi_galian_4" model="hs.lokasi.galian">
             <field name="name">Galian C Wardi</field>
         </record>
-        <record id="data_lokasi_galian_5" model="hs.lokasigalian">
+        <record id="data_lokasi_galian_5" model="hs.lokasi.galian">
             <field name="name">Galian C Kantor</field>
-        </record> -->
+        </record>
 
         <!--DEMO RECORD FOR ARMADA-->
-        <!-- <record id="arm_1" model="hs.armada">
+        <record id="arm_1" model="hs.armada">
             <field name="name">DK 9479 GH</field>
             <field name="keterangan">DT Mitsubishi</field>
         </record>
@@ -337,10 +337,10 @@
         <record id="arm_53" model="hs.armada">
             <field name="name">DK 9432 ER</field>
             <field name="keterangan">DT Mitsubishi</field>
-        </record> -->
+        </record>
 
         <!--DEMO DATA FOR KARYAWAN-->
-        <!-- <record id="kar_1" model="hs.karyawan">
+        <record id="kar_1" model="hs.karyawan">
             <field name="name">Bambang Haryono</field>
             <field name="panggilan">Ion</field>
             <field name="jabatan">STF</field>
@@ -404,7 +404,7 @@
             <field name="name">M. Iqbal Yazid Al</field>
             <field name="panggilan">Iqbal</field>
             <field name="jabatan">DRV</field>
-        </record> -->
+        </record>
         
         
         

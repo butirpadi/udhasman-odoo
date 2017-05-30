@@ -3,7 +3,7 @@
 		
 		<!-- Action View -->
 		<record id="hs_action_partner_supplier_form" model="ir.actions.act_window">
-            <field name="name">Data Supplier</field>
+            <field name="name">Supplier</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.partner</field>
             <field name="inherit_id" ref="base.action_partner_supplier_form"/>

@@ -48,7 +48,7 @@
 	    <!-- actions opening views on models -->
 	    
 	    <record model="ir.actions.act_window" id="hs_action_pekerjaan">
-	      <field name="name">Data Pekerjaan</field>
+	      <field name="name">Pekerjaan</field>
 	      <field name="res_model">hs.pekerjaan</field>
 	      <field name="view_mode">tree,form</field>
 	      <!-- <field name="domain">[('partner_id.customer','=',1)]</field> -->

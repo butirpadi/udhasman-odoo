@@ -13,7 +13,7 @@
             <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
             <field name="inherit_id" ref="sale.action_orders"/>
             <field name="domain">[('supplier','=',0),('customer','=',1),('is_company','=',1)]</field>
-            <field name="domain">[('state', 'in', ('draft', 'sale', 'done', 'sent', 'cancel'))]</field>
+            <field name="domain">[('state', 'in', ('draft', 'sale', 'done', 'sent'))]</field>
         </record>
 
         <!-- Sales Order Form -->
@@ -23,6 +23,16 @@
             <field name="priority" eval="2"/>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
+                <!-- Edit Button lock , visible hanya ketika status invoice fully invoiced -->
+                <!-- <button name="action_done" state="sale" position="attributes">
+                    <attribute name="state">False</attribute>
+                </button> -->
+                <button name="action_done" states="sale" position="attributes">
+                    <!-- <attribute name="invisible">1</attribute> -->
+                    <attribute name="attrs">{'invisible': [('invoice_status', 'not in', ['invoiced'])]}</attribute>
+                    <!-- <attribute name="string">Set to Done</attribute> -->
+                </button>
+
                 <!-- Tambahkan Field Pekerjaan -->
                 <field name="partner_id" position="after">
                     <field name="pekerjaan_id" domain="[('partner_id','=',partner_id)]" options='{"no_create": 1, "no_create_edit": 1, "no_open":1}' attrs="{'readonly':[('state','!=','draft')]}" />
@@ -153,6 +163,7 @@
                 <!-- Tampilkan Status Pengiriman -->
                 <field name="date_order" position="after">
                     <field name="picking_status" invisible="1" />
+                    <!-- <field name="invoice_status"   /> -->
                     <!-- <field name="status_nota_timbang" /> -->
                 </field>
 
@@ -203,13 +214,12 @@
                                 <field name='tinggi' attrs="{'invisible':[('kalkulasi','!=','kubikasi')],'readonly':[('state','in',['done','cancel'])]}" />
                                 <field name='gross' attrs="{'invisible':[('kalkulasi','!=','tonase')],'readonly':[('state','in',['done','cancel'])]}"/>
                                 <field name='tare' attrs="{'invisible':[('kalkulasi','!=','tonase')],'readonly':[('state','in',['done','cancel'])]}" />
-                            </group>
-                            <group>
                                 <field name='volume'  attrs="{'invisible':[('kalkulasi','!=','kubikasi')],'readonly':[('state','in',['done','cancel'])]}" />
                                 <field name='netto'  attrs="{'invisible':[('kalkulasi','!=','tonase')],'readonly':[('state','in',['done','cancel'])]}" />
+                            </group>
+                            <group>
                                 <field name='harga_satuan' attrs="{'readonly':[('state','in',['done','cancel'])]}" />
                                 <field name='harga_total' attrs="{'readonly':[('state','in',['done','cancel'])]}" />
-                                
                             </group>
                         </group>
                     </page>
@@ -217,8 +227,19 @@
 
                 <!-- Tambabhkan Tombol Validate Nota Timbang pada Header -->
                 <xpath expr="//form/header/button[@name='action_cancel']" position="before">
-                    <button name="action_validate_nota_timbang" string="Validate Nota Timbang" type="object" class="btn-primary" attrs="{'invisible':[('status_nota_timbang','in',['draft','done'])]}" />
+                    <button name="action_validate_nota_timbang" string="Validate Nota Timbang" type="object" class="btn-primary" attrs="{'invisible':['|',('state','in',['draft','cancel']),('status_nota_timbang','in',['draft','done'])]}" />
                 </xpath>
+                <!-- Tambahkan tombol reset  -->
+                <xpath expr="//form/header/button[@name='action_cancel']" position="before">
+                    <button name="reset_sale_order" string="Reset" type="object" class="btn-warning" confirm="Anda akan me-reset data ini? Data tidak dapat dikembalikan!" attrs="{'invisible':['|',('status_nota_timbang','not in',['done']),('invoice_status','in',['invoiced','to invoice'])]}" />
+                    <!-- <button name="reset_sale_order" string="Reset" type="object" class="btn-warning" confirm="Anda akan me-reset data ini? Data tidak dapat dikembalikan!" attrs="{'invisible':[('status_nota_timbang','not in',['done'])]}" /> -->
+                </xpath>
+
+                <!-- Add Confirmation on Cancel Button -->
+                <button name="action_cancel" position="attributes">
+                    <attribute name="confirm">Anda akan membatalkan transaksi ini? Data tidak dapat dikembalikan</attribute>
+                    <!-- <attribute name="attrs">{'invisible':[('state','in',['draft'])]}</attribute> -->
+                </button>
 
             </field>
         </record>
@@ -234,15 +255,82 @@
                 <xpath expr="//tree/field[@name='user_id']" position="attributes" >
                     <attribute name="invisible">1</attribute>
                 </xpath>
-                <xpath expr="//tree/field[@name='user_id']" position="before" >
+                <!-- <xpath expr="//tree/field[@name='user_id']" position="before" >
                     <field name="driver" />
+                </xpath> -->
+
+                <!-- Enable state -->
+                <field name="state" position="attributes" >
+                    <attribute name="invisible">0</attribute>
+                </field>
+                
+                <!-- Field Pekerjaan -->
+                <xpath expr="//tree/field[@name='partner_id']" position="after" >
+                    <field name="pekerjaan_id" />
+                </xpath>
+
+                <!-- Field Material -->
+                <xpath expr="//tree/field[@name='pekerjaan_id']" position="after" >
+                    <field name="material" />
                 </xpath>
                <!--  <xpath expr="//tree/field[@name='user_id']" position="before" >
                     <field name="picking_status" />
                 </xpath> -->
             </field>
         </record>
-        
+
+        <!-- Search View -->
+        <!-- cLEAR Filter -->
+        <record id="hs_view_sales_order_filter" model="ir.ui.view">
+            <field name="name">hs.sale.order.list.select</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search/filter" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//search/filter[2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//search/group/filter" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!-- <xpath expr="//search/group/filter[2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath> -->
+                <xpath expr="//search/group/filter[3]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Add Filter -->
+                <filter name="customer" position="after">
+                    <filter name="pekerjaan" string="Pekerjaan" domain="[]" context="{'group_by':'pekerjaan_id'}"/>
+                    <filter name="material" string="Material" domain="[]" context="{'group_by':'material'}"/>
+                </filter>
+            </field>
+        </record>
+        <!-- Clear Filter 2 -->
+        <record id="hs_sale_order_view_search_inherit_sale" model="ir.ui.view">
+            <field name="name">hs.sale.order.search.inherit.sale</field>
+            <field name="model">sale.order</field>
+            <!-- <field name="mode">primary</field> -->
+            <field name="inherit_id" ref="sale.sale_order_view_search_inherit_sale"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search/filter" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//search/filter[2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//search/filter[3]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//search/filter[4]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
 
     </data>
 </openerp>

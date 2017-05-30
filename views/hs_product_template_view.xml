@@ -1,7 +1,7 @@
 <openerp>
     <data>
         <record id="hs_product_template_action" model="ir.actions.act_window">
-            <field name="name">Data Product</field>
+            <field name="name">Product</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">product.template</field>
             <field name="inherit_id" ref="product.product_template_action"/>

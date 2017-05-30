@@ -38,7 +38,7 @@
 	    <!-- actions opening views on models -->
 	    
 	    <record model="ir.actions.act_window" id="hs_action_armada">
-	      <field name="name">Data Armada</field>
+	      <field name="name">Armada</field>
 	      <field name="res_model">hs.armada</field>
 	      <field name="view_mode">tree,form</field>
 	    </record>

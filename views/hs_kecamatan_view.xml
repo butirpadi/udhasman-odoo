@@ -39,7 +39,7 @@
     <!-- actions opening views on models -->
     
     <record model="ir.actions.act_window" id="hs_action_kecamatan">
-      <field name="name">Data Kecamatan</field>
+      <field name="name">Kecamatan</field>
       <field name="res_model">hs.kecamatan</field>
       <field name="view_mode">tree,form</field>
     </record>

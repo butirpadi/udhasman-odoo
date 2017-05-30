@@ -34,7 +34,7 @@
     <!-- actions opening views on models -->
     
     <record model="ir.actions.act_window" id="hs_action_product_unit">
-      <field name="name">Data Product Unit</field>
+      <field name="name">Product Unit</field>
       <field name="res_model">hs.product.unit</field>
       <field name="view_mode">tree,form</field>
     </record>

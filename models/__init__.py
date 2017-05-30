@@ -14,8 +14,13 @@ import hs_res_partner
 import hs_pekerjaan
 import hs_purchase
 import hs_account_invoice
+import hs_account_invoice_line
 import hs_sale_order
 import hs_sale_order_line
 import hs_stock_picking
 import hs_account_payment
-# import hs_nota_timbang
+import hs_finance_cash
+import hs_jurnal_kas
+import hs_op_alat
+import hs_presensi
+import hs_presensi_karyawan_rel

@@ -1,0 +1,75 @@
+<openerp>
+	<data>
+		
+		<record id="hs_inherit_invoice_form" model="ir.ui.view">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+            	<!-- Hiddeen object -->
+            	<button name="action_invoice_sent" attrs="{'invisible':['|',('sent','=',True), ('state', '!=', 'open')]}" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</button>
+                <button name="action_invoice_sent" attrs="{'invisible':['|',('sent','=',False), ('state', '!=', 'open')]}" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</button>
+            	<button name="invoice_print" attrs="{'invisible':['|',('sent','=',True), ('state', '!=', 'open')]}" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</button>
+                <button name="invoice_print" attrs="{'invisible':['|',('sent','=',False), ('state', '!=', 'open')]}" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</button>
+            	<button name="%(account.action_account_invoice_refund)d" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</button>
+            	<button name="action_invoice_cancel" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</button>
+            	<button name="%(account.action_account_invoice_payment)d" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</button>
+            	<field name="payment_term_id" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</field>
+            	<field name="user_id" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</field>
+            	<field name="team_id" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</field>
+            	<field name="amount_untaxed" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</field>
+            	<field name="amount_tax" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</field>
+            	<field name="partner_id" position="attributes">
+            		<attribute name="context">{'search_default_customer':1, 'show_address': 0}</attribute>
+            	</field>
+            	<xpath expr="//form/sheet/notebook/page[2]" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</xpath>
+            	<field name="name" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</field>
+            	<field name="invoice_line_tax_ids" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</field>
+
+            	<!-- Edit Attribute -->
+            	<form position="attributes">
+            		<attribute name="create">0</attribute>
+            		<attribute name="edit">0</attribute>
+            	</form>
+
+            	<!-- Add new element -->
+            	<field name="partner_id" position="after">
+            		<field name="pekerjaan" />
+            	</field>
+
+
+            </field>
+        </record>
+
+	</data>
+</openerp>

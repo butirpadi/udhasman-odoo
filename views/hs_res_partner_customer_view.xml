@@ -2,7 +2,7 @@
     <data>
         <!-- Action View -->
         <record id="hs_action_partner_customer_form" model="ir.actions.act_window">
-            <field name="name">Data Customer</field>
+            <field name="name">Customer</field>
             <field name="res_model">res.partner</field>
             <field name="inherit_id" ref="base.action_partner_supplier_form"/>
             <field name="view_mode">tree,form</field>
@@ -20,7 +20,25 @@
                     <notebook attrs="{'invisible': [('customer','=', False)]}" >
                         <page string="Data Pekerjaan" >
                             <!-- <group> -->
-                                <field name="pekerjaan_ids">
+                                <!-- <field name="id" /> -->
+                                <field name="pekerjaan_ids" context="{'default_partner_id':id}">
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="name" />
+                                                    <field name="tahun" />            
+                                                    <field name="partner_id" invisible="1" />
+                                                </group>
+                                                <group>
+                                                    <field name="provinsi_id" options="{'no_create': True, 'no_open': True}"  />
+                                                    <field name="kabupaten_id" options="{'no_create': True, 'no_open': True}" domain="[('provinsi_id','=',provinsi_id)]" />
+                                                    <field name="kecamatan_id" options="{'no_create': True, 'no_open': True}" domain="[('kabupaten_id','=',kabupaten_id)]" />
+                                                    <field name="alamat" />     
+                                                </group>
+                                            </group>   
+                                        </sheet>
+                                    </form>
                                     <tree>
                                         <field name="name" />
                                         <field name="tahun" />
@@ -33,5 +51,46 @@
                 </xpath>
             </field>
         </record>
+
+        <!-- Search View -->
+        <!-- Clear Filter -->
+        <record id="hs_view_res_partner_filter" model="ir.ui.view">
+            <field name="name">hs.res.partner.select</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+               <xpath expr="//search/filter" position="attributes" >
+                   <attribute name="invisible">1</attribute>
+               </xpath>
+               <xpath expr="//search/filter[2]" position="attributes" >
+                   <attribute name="invisible">1</attribute>
+               </xpath>
+               <xpath expr="//search/filter[3]" position="attributes" >
+                   <attribute name="invisible">1</attribute>
+               </xpath>
+               <xpath expr="//search/filter[4]" position="attributes" >
+                   <attribute name="invisible">1</attribute>
+               </xpath>
+               <xpath expr="//search/filter[5]" position="attributes" >
+                   <attribute name="invisible">1</attribute>
+               </xpath>
+               <xpath expr="//search/filter[6]" position="attributes" >
+                   <attribute name="invisible">1</attribute>
+               </xpath>
+            </field>
+        </record>
+        <!-- Clear Filter -->
+        <record model="ir.ui.view" id="hs_res_partner_opt_out_search">
+            <field name="name">res.partner.opt_out.search</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="mail.res_partner_opt_out_search"/>
+            <field name="arch" type="xml">
+                <filter name='not_opt_out' position="attributes" >
+                    <attribute name="invisible">1</attribute>
+                </filter>
+            </field>
+        </record>
+
+
     </data>
 </openerp>

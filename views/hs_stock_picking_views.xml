@@ -1,0 +1,113 @@
+<openerp>
+	<data>
+		<!-- Action View -->
+		<record id="hs_stock_picking_action_picking_type" model="ir.actions.act_window">
+            <field name="name">Delivery Order</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain"></field>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+            <field name="inherit_id" ref="stock.stock_picking_action_picking_type"/>
+            <field name="domain">[('state', 'not in', ['cancel']),('picking_type_id','=',4)]</field>
+            <field name="context">{
+                    'default_picking_type_id': 4,
+                    'contact_display': 'partner_address',
+            }
+            </field>
+        </record>
+
+
+        <!-- Form View -->
+        <record id="hs_vpicktree" model="ir.ui.view">
+            <field name="name">hs.stock.picking.tree</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="arch" type="xml">
+                <!-- Disable Create & Edit -->
+                <tree position="attributes">
+                    <attribute name="create">false</attribute>
+                    <attribute name="edit">false</attribute>
+                </tree>
+
+                <!-- Hide Destination Locagtion Zone -->
+                <field name="location_dest_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+
+                <!-- Ganti partner ke customer -->
+                <field name="partner_id" position="attributes">
+                    <attribute name="string">Customer</attribute>
+                </field>
+
+                <!-- Scheduled Date ganti ke Delivery Date -->
+                <field name="min_date" position="attributes">
+                    <attribute name="string">Delivery Date</attribute>
+                </field>
+
+                <!-- Hide Bbackorder Of -->
+                <field name="backorder_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+            </field>
+        </record>
+
+        <!-- Clear Filter -->
+        <record id="hs_view_picking_internal_search" model="ir.ui.view">
+            <field name="name">hs.stock.picking.internal.search</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search/filter" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//search/filter[2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//search/filter[3]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//search/filter[4]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//search/filter[5]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//search/filter[6]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//search/filter[7]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!-- <xpath expr="//search/group/filter" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath> -->
+                <xpath expr="//search/group/filter[2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//search/group/filter[3]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//search/group/filter[4]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//search/group/filter[5]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//search/group/filter[6]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                
+                <!-- Add Group Filter -->
+                <xpath expr="//search/group/filter" position="after">
+                    <filter string="Customer" domain="[]"  context="{'group_by':'partner_id'}"/>
+                    <filter string="Pekerjaan" domain="[]"  context="{'group_by':'pekerjaan'}"/>
+                    <filter string="Lokasi Galian" domain="[]"  context="{'group_by':'lokasi_galian_id'}"/>
+                    <filter string="Driver" domain="[]"  context="{'group_by':'karyawan_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+	</data>
+</openerp>

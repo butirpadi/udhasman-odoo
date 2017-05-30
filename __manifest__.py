@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "udhasman",
+    'name': "Aplikasi Hasil Mancing",
 
     'summary': """
         Aplikasi Penjualan & Pembelian
@@ -22,7 +22,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','purchase','sale'],
+    'depends': ['base','purchase','sale','account','inputmask_widget','nas_beauty_style','odoo_web_login'],
 
     # always loaded
     'data': [
@@ -38,18 +38,30 @@
         'views/hs_armada_view.xml',
         'views/hs_product_unit_view.xml',
         'views/hs_karyawan_view.xml',
-        'views/hs_product_template_view.xml',
+        # 'views/hs_product_template_view.xml',
+        'views/hs_material_views.xml',
         'views/hs_res_partner_supplier_view.xml',
         'views/hs_res_partner_customer_view.xml',
         'views/hs_pekerjaan_view.xml',
         'views/hs_purchase_view.xml',
         'views/hs_account_invoice_supplier_view.xml',
         'views/hs_account_payment_view.xml',
+        'views/hs_inherit_account_invoice_view.xml',
         'views/hs_sale_view.xml',
         'views/hs_stock_picking_view.xml',
         'views/hs_sale_make_invoice_advance_views.xml',
         'views/hs_account_invoice_view.xml',
+        'views/hs_stock_picking_views.xml',
+        'views/hs_sale_delivery_order_views.xml',
+        'views/hs_finance_cash_pendapatan_views.xml',
+        'views/hs_finance_cash_pengeluaran_views.xml',
+        'views/hs_finance_jurnal_kas_views.xml',
+        'views/hs_finance_jurnal_kas_form.xml',
+        'views/hs_op_alat_berat_views.xml',
+        'views/hs_presensi_views.xml',
+        'views/hs_presensi_rekap_view.xml',
         'views/menu.xml',
+        'data/ir_sequence_data.xml',
         # 'views/demo_appkonfig.xml'
     ],
     # only loaded in demonstration mode
