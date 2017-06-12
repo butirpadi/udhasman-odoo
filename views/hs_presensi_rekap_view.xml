@@ -10,15 +10,15 @@
 	    </record>
 
 		<!-- List View -->
-		<record model="ir.ui.view" id="hs_presensi_tree">
+		<record model="ir.ui.view" id="hs_rekap_presensi_tree">
 	      <field name="name">hs.presensi.rekap.tree</field>
 	      <field name="model">hs.presensi_karyawan_rel</field>
 	      <field name="arch" type="xml">
-	        <tree>
-	          <!--<field name="create_date"/>-->
+	        <tree create="false" edit="false">
+	          <field name="tanggal"/>
 	          <field name="karyawan_id"/>
-	          <field name="pagi"/>
-	          <field name="siang"/>
+	          <field name="pagi" />
+	          <field name="siang" />
 	        </tree>
 	      </field>
 	    </record>

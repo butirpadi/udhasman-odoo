@@ -33,15 +33,16 @@
                 <menuitem name="Customer Invoices" id="hs_menu_customer_invoices" parent="hs_menu_sales" action="udhasman.hs_action_customer_invoice" sequence="12" />
 
     <menuitem name="Operational" id="hs_menu_root_operational" sequence="5" />
-            <menuitem name="Operational" id="hs_menu_operational" parent="hs_menu_root_operational" />
-                <menuitem name="Alat Berat" id="hs_menu_operational_alat_berat" parent="hs_menu_operational" action="udhasman.hs_action_op_alat" />
+            <menuitem name="Operational" id="hs_menu_operational" parent="hs_menu_root_operational" sequence="1" />
+                <menuitem name="Alat Berat" id="hs_menu_operational_alat_berat" parent="hs_menu_operational" action="udhasman.hs_action_op_alat" sequence="2" />
+            <menuitem name="Presensi" id="hs_menu_presensi" parent="hs_menu_root_operational" sequence="3" />
+                <menuitem name="Input Presensi" id="hs_menu_presensi_karyawan" parent="hs_menu_presensi" action="udhasman.hs_action_presensi" sequence="4" />
+                <menuitem name="Rekap Presensi" id="hs_menu_presensi_karyawan_rekap" parent="hs_menu_presensi" action="udhasman.hs_action_rekap_presensi" sequence="5" />
+            <menuitem name="Payroll" id="hs_menu_presensi_payroll" parent="hs_menu_root_operational" sequence="6" />
+                <menuitem name="Driver" id="hs_menu_presensi_payroll_driver" parent="hs_menu_presensi_payroll" action="udhasman.hs_action_payroll_driver" sequence="7"  />
+                <menuitem name="Staff" id="hs_menu_presensi_payroll_staff" parent="hs_menu_presensi_payroll" action="udhasman.hs_action_presensi" sequence="8"  />
 
-    <menuitem name="Karyawan" id="hs_menu_root_presensi" sequence="5" />
-            <menuitem name="Presensi" id="hs_menu_presensi" parent="hs_menu_root_presensi" sequence="1" />
-                <menuitem name="Input Presensi" id="hs_menu_presensi_karyawan" parent="hs_menu_presensi" action="udhasman.hs_action_presensi" sequence="2" />
-                <menuitem name="Rekap Presensi" id="hs_menu_presensi_karyawan_rekap" parent="hs_menu_presensi" action="udhasman.hs_action_rekap_presensi" sequence="3" />
-            <menuitem name="Payroll" id="hs_menu_presensi_payroll" parent="hs_menu_root_presensi" sequence="4" />
-                <menuitem name="Payroll" id="hs_menu_presensi_payroll_input" parent="hs_menu_presensi_payroll" action="udhasman.hs_action_presensi" sequence="5"  />
+    <!-- <menuitem name="Karyawan" id="hs_menu_root_presensi" sequence="5" /> -->
                 
     <menuitem name="Finance" id="hs_menu_root_finance" sequence="6" />
             <menuitem name="Finance" id="hs_menu_finance" parent="hs_menu_root_finance" />
@@ -49,6 +50,10 @@
                 <menuitem name="Pengeluaran" id="hs_menu_finance_cash_credit" parent="hs_menu_finance" action="udhasman.hs_action_finance_cash_credit_view" />
                 <menuitem name="Jurnal Kas" id="hs_menu_finance_jurnal_kas_form" parent="hs_menu_finance" action="udhasman.hs_action_finance_jurnal_kas_form_view" />
 
+    <menuitem name="System Config" id="hs_menu_root_config" sequence="6" />
+            <menuitem name="System Config" id="hs_menu_config" parent="hs_menu_root_config" />
+                <menuitem name="Config" id="hs_menu_config_act" parent="hs_menu_config" action="udhasman.hs_action_appkonfig" />
+                
 
   </data>
 </openerp>

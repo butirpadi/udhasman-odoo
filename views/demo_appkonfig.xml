@@ -1,43 +1,5 @@
 <openerp>
     <data noupdate="1">
-        <!-- Data Setting One Step Purchasing -->
-        <record id="data_setting_1" model="ir.config_parameter">
-            <field name="key">one_step_purchasing</field>
-            <field name="value">True</field>
-        </record>
-        <!-- Data Setting -->
-        <record id="first_course_item" model="hs.appkonfig">
-            <field name="name">driver_kode_prefix</field>
-            <field name="value">SPR</field>
-        </record>
-        <record id="second_course_item" model="hs.appkonfig">
-            <field name="name">driver_kode_counter</field>
-            <field name="value">1</field>
-        </record>
-        <record id="third_course_item" model="hs.appkonfig">
-            <field name="name">staff_kode_prefix</field>
-            <field name="value">STF</field>
-        </record>
-        <record id="4_course_item" model="hs.appkonfig">
-            <field name="name">staff_kode_counter</field>
-            <field name="value">1</field>
-        </record>
-        <record id="5_course_item" model="hs.appkonfig">
-            <field name="name">armada_kode_prefix</field>
-            <field name="value">ARM</field>
-        </record>
-        <record id="6_course_item" model="hs.appkonfig">
-            <field name="name">armada_kode_counter</field>
-            <field name="value">1</field>
-        </record>
-        <record id="7_course_item" model="hs.appkonfig">
-            <field name="name">alat_kode_prefix</field>
-            <field name="value">ABT</field>
-        </record>
-        <record id="8_course_item" model="hs.appkonfig">
-            <field name="name">alat_kode_counter</field>
-            <field name="value">1</field>
-        </record>
 
         <!-- DATA PRODUCT -->
         <record id="product_1" model="product.template">

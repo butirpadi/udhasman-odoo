@@ -332,5 +332,8 @@
         </record>
 
 
+        <!-- Button Report -->
+        <act_window name="Cetak Report" id="action_cetak_report_sale_list" res_model="sale.order" src_model="sale.order" key2="client_action_multi" view_mode="form" view_type="form" context="{'default_var_selected_ids':active_ids,}" /> 
+
     </data>
 </openerp>

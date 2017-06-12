@@ -5,4 +5,5 @@ class hs_appkonfig(models.Model):
     _description = 'Application Config Data'
 
     name = fields.Char('Name', required=True)
-    value = fields.Char('Value')
+    desc = fields.Char('Nama')
+    value = fields.Text('Value')

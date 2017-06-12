@@ -18,7 +18,8 @@ class hs_karyawan(models.Model):
 	kecamatan_id = fields.Many2one('hs.kecamatan', 'Kecamatan')
 	jabatan = fields.Selection([('DRV', 'DRIVER'), ('STF', 'STAFF')], required=True)
 	gaji_per_shift = fields.Float('Gaji per Shift')
-	armada_id = fields.Many2one('hs.armada', domain=lambda self: [('id', 'not in', self._get_armada_ids())], string='Armada')
+	# armada_id = fields.Many2one('hs.armada', domain=lambda self: [('id', 'not in', self._get_armada_ids())], string='Armada')
+	armada_id = fields.Many2one('hs.armada', string='Armada')
 	presensi_rel_ids = fields.One2many('hs.presensi_karyawan_rel', 'karyawan_id', string="Daftar Presensi")
 
 	@api.multi

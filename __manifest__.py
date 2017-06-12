@@ -27,8 +27,7 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        # 'views/views.xml',
-        # 'views/templates.xml',
+        'views/hs_paper_format.xml',
         'views/hs_toggle_leftbar.xml',
         'views/hs_provinsi_view.xml',
         'views/hs_kabupaten_view.xml',
@@ -38,7 +37,6 @@
         'views/hs_armada_view.xml',
         'views/hs_product_unit_view.xml',
         'views/hs_karyawan_view.xml',
-        # 'views/hs_product_template_view.xml',
         'views/hs_material_views.xml',
         'views/hs_res_partner_supplier_view.xml',
         'views/hs_res_partner_customer_view.xml',
@@ -60,8 +58,12 @@
         'views/hs_op_alat_berat_views.xml',
         'views/hs_presensi_views.xml',
         'views/hs_presensi_rekap_view.xml',
+        'views/hs_payroll_driver_view.xml',
+        'views/hs_appkonfig.xml',
+        # 'views/hs_sale_report_view.xml',
         'views/menu.xml',
         'data/ir_sequence_data.xml',
+        'views/hs_data_appkonfig.xml'
         # 'views/demo_appkonfig.xml'
     ],
     # only loaded in demonstration mode

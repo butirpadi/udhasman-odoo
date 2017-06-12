@@ -5,7 +5,7 @@ class hs_presensi(models.Model):
 
 	name = fields.Char(string='Reference', required=True, copy=False, readonly=True, 
     					index=True, select=True, default='New')
-	tanggal = fields.Datetime('Tanggal')
+	tanggal = fields.Date('Tanggal')
 
 	# karyawan_rel_ids = fields.One2many('hs.presensi_karyawan_rel', 'presensi_id', 
 										# string="Presensi Karyawan", compute='_compute_get_karyawan')

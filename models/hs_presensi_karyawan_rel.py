@@ -8,3 +8,4 @@ class hs_presensi_karyawan(models.Model):
 	karyawan_id = fields.Many2one('hs.karyawan', string='Karyawan')
 	pagi = fields.Boolean('Pagi')
 	siang = fields.Boolean('Siang')
+	tanggal = fields.Date(related="presensi_id.tanggal",string="Tanggal")

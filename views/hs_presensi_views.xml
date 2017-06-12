@@ -36,7 +36,7 @@
 	            </div>
 	            <group>
 	            	<group>
-	                	<field name="tanggal" widget="date" attrs="{'readonly': [('name','!=','New')]}" />
+	                	<field name="tanggal" attrs="{'readonly': [('name','!=','New')]}" />
 	            	</group>
 	            	<group>
 						<button type="object" name="generate_data_karyawan" string="Submit" class="btn btn-primary" attrs="{'invisible': [('name','!=','New')]}"/>
@@ -45,16 +45,6 @@
 	            <notebook>
                   <page string="Data Presensi">
                     <field name="karyawan_rel_ids" context="{'default_presensi_id':id}" >
-                    	<form>
-                    		<sheet>
-                    			<group>
-                    				<field name="karyawan_id" domain="[('jabatan','=','STF')]" />
-                    				<field name="pagi" />
-                    				<field name="siang" />
-                    				<field name="presensi_id" invisible="1" />
-                    			</group>
-                    		</sheet>
-                    	</form>
                     	<tree create="false" edit="true" editable="bottom" >
                     		<field name="karyawan_id" options='{"no_create": 1, "no_create_edit": 1, "no_open":1}' />
                     		<field name="pagi" />
@@ -66,6 +56,19 @@
 	          </sheet>
 	        </form>
 	      </field>
+	    </record>
+
+	    <!-- Custom Form & Tree View -->
+        <record model="ir.actions.act_window.view" id="hs_action_presensi_tree">
+	      <field name="view_mode">tree</field>
+	      <field name="view_id" ref="hs_presensi_tree"/>
+	      <field name="act_window_id" ref="hs_action_presensi"/>
+	    </record>
+
+	    <record model="ir.actions.act_window.view" id="hs_action_presensi_form">
+	      <field name="view_mode">form</field>
+	      <field name="view_id" ref="hs_presensi_form"/>
+	      <field name="act_window_id" ref="hs_action_presensi"/>
 	    </record>
 	    
 
